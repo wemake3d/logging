@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h1 id="g">loading...</h1>
-
 <script>
   const params = new URLSearchParams(window.location.search);
-  const grade = params.get("v") || localStorage.getItem("routeGrade") || "unknown";
+  const fromUrl = params.get("v");
+  const fromStorage = localStorage.getItem("routeGrade");
+  const grade = fromUrl || fromStorage || "unknown";
 
-  document.getElementById("g").innerText = grade;
+  document.body.innerHTML = `
+    <h1>Grade Page</h1>
+    <p>From URL: ${fromUrl}</p>
+    <p>From Storage: ${fromStorage}</p>
+    <p>Final Grade: ${grade}</p>
+  `;
 
-  if (window.ReactNativeWebView) {
-    window.ReactNativeWebView.postMessage(grade);
-  }
+  setTimeout(() => {
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(grade);
+    }
+    if (window.parent) {
+      window.parent.postMessage(grade, "*");
+    }
+  }, 500);
 </script>
-</body>
-</html>
