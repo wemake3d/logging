@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h1>Opening logger...</h1>
-<p id="status">Saving route...</p>
-
 <script>
   const params = new URLSearchParams(window.location.search);
   const grade = params.get("v") || "unknown";
@@ -12,15 +9,9 @@
     "https://script.google.com/macros/s/AKfycbxmvsMC3Tzacx00FbyAQLtcG4eUmOxU_23J_9JMYcFWziyQiMrwWlTdwQkXF2DFO5pP/exec?action=set&v="
     + encodeURIComponent(grade);
 
-  fetch(api)
-    .then(() => {
-      document.getElementById("status").innerText = "Saved: " + grade;
-
-      window.location.href =
-        "https://thunkable.site/w/fF5gRGy6ut_VukeXF_wRl";
-    })
-    .catch(() => {
-      document.getElementById("status").innerText = "Error saving route.";
+  fetch(api, { cache: "no-store" })
+    .finally(() => {
+      window.location.replace("https://thunkable.site/w/fF5gRGy6ut_VukeXF_wRl");
     });
 </script>
 </body>
