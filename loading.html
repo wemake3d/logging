@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const grade = params.get("v") || "unknown";
+
+  localStorage.setItem("routeGrade", grade);
+
+  window.location.href = "https://thunkable.site/w/YOUR_THUNKABLE_APP_ID";
+</script>
+</body>
+</html>
