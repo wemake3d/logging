@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Launch</title>
-</head>
 <body>
-  <h1>Launcher loading...</h1>
+<h1>Opening logger...</h1>
+<p id="status">Saving route...</p>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const grade = params.get("v") || "unknown";
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const grade = params.get("v") || "unknown";
 
-    localStorage.setItem("routeGrade", grade);
+  const api =
+    "https://script.google.com/macros/s/AKfycbxmvsMC3Tzacx00FbyAQLtcG4eUmOxU_23J_9JMYcFWziyQiMrwWlTdwQkXF2DFO5pP/exec?action=set&v="
+    + encodeURIComponent(grade);
 
-    document.body.innerHTML = `
-      <h1>Launcher</h1>
-      <p>Grade from URL: ${grade}</p>
-      <p>Stored grade: ${localStorage.getItem("routeGrade")}</p>
-      <p>Redirect disabled for testing.</p>
-    `;
-  </script>
+  fetch(api)
+    .then(() => {
+      document.getElementById("status").innerText = "Saved: " + grade;
+
+      window.location.href =
+        "https://thunkable.site/w/fF5gRGy6ut_VukeXF_wRl";
+    })
+    .catch(() => {
+      document.getElementById("status").innerText = "Error saving route.";
+    });
+</script>
 </body>
 </html>
