@@ -1,17 +1,23 @@
-<script>
-  const params = new URLSearchParams(window.location.search);
-  const grade = params.get("v") || "unknown";
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Launch</title>
+</head>
+<body>
+  <h1>Launcher loading...</h1>
 
-  localStorage.setItem("routeGrade", grade);
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const grade = params.get("v") || "unknown";
 
-  document.body.innerHTML = `
-    <h1>Launcher</h1>
-    <p>Grade from URL: ${grade}</p>
-    <p>Stored grade: ${localStorage.getItem("routeGrade")}</p>
-    <p>Redirecting...</p>
-  `;
+    localStorage.setItem("routeGrade", grade);
 
-  setTimeout(() => {
-    window.location.href = "https://thunkable.site/w/YOUR_APP_ID";
-  }, 2000);
-</script>
+    document.body.innerHTML = `
+      <h1>Launcher</h1>
+      <p>Grade from URL: ${grade}</p>
+      <p>Stored grade: ${localStorage.getItem("routeGrade")}</p>
+      <p>Redirect disabled for testing.</p>
+    `;
+  </script>
+</body>
+</html>
