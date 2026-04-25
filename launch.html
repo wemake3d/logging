@@ -45,10 +45,13 @@
 <script>
   const params = new URLSearchParams(window.location.search);
   const grade = params.get("v") || "unknown";
+  const route = params.get("r") || "unknown";
 
   const api =
     "https://script.google.com/macros/s/AKfycbxmvsMC3Tzacx00FbyAQLtcG4eUmOxU_23J_9JMYcFWziyQiMrwWlTdwQkXF2DFO5pP/exec?action=set&v="
-    + encodeURIComponent(grade);
+    + encodeURIComponent(grade)
+    + "&r="
+    + encodeURIComponent(route);
 
   fetch(api, { cache: "no-store" })
     .finally(() => {
